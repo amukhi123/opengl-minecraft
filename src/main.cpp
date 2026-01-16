@@ -1,6 +1,20 @@
-#include <iostream>
+#include "core/engine/engine.h"
+#include "util/logger.h"
 
 int main()
 {
-    std::cout << "Hello world" << std::endl;
+    Engine* engine {Engine::GetInstance()};
+    
+    if (engine)
+    {
+        engine->Init();
+        
+        engine->Run();
+        
+        engine->Destroy();
+    }
+    else 
+    {
+        Logger::GetInstance()->Log("Failed to create Engine! Exiting...", LogLevel::Error);
+    }
 }

@@ -1,0 +1,8 @@
+#pragma once
+
+class EngineSystem
+{
+public:
+    virtual void Init() = 0;
+    virtual void Destroy() = 0;
+};
