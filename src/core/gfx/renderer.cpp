@@ -23,16 +23,16 @@ void Renderer::Init()
         exit(EXIT_FAILURE);
     }
     
-    glViewport(0, 0, 800, 800);
+    glViewport(0, 0, m_Window.GetWidth(), m_Window.GetHeight());
 }
 
-void Renderer::Render()
+void Renderer::Run()
 {
-    while (!glfwWindowShouldClose(m_Window.GetWindow()))
-    {
-        glfwSwapBuffers(m_Window.GetWindow());
-        glfwPollEvents();
-    }
+    glClearColor(0.3f, 0.4f, 0.5f, 1.f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    glfwSwapBuffers(m_Window.GetWindow());
+    glfwPollEvents();
 }
 
 void Renderer::Destroy()

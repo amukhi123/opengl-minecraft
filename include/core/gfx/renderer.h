@@ -9,11 +9,21 @@ class Renderer : public EngineSystem
 public:
     Renderer();
 
-void Init() override;
+    void Init() override;
     
-    void Render();
+    void Run() override;
     
     void Destroy() override;
+    
+    Window* GetWindow()
+    {
+        return &m_Window;
+    } 
+    
+    GLFWwindow* GetWindowPtr() const
+    {
+        return m_Window.GetWindow();
+    }
 private:
     Window m_Window;
 };

@@ -5,7 +5,7 @@
 
 #include "util/logger.h"
 
-Window::Window(const int Width, const int Height) : m_Width {Width}, m_Height {Height}
+Window::Window(const int Width, const int Height) : m_Window {nullptr}, m_Width {Width}, m_Height {Height}
 {
 }
 
@@ -32,7 +32,16 @@ void Window::Init()
     glfwMakeContextCurrent(m_Window);
 }
 
+void Window::Run()
+{
+    // No op
+}
+
 void Window::Destroy()
 {
-    
+}
+
+void Window::SetShouldCloseWindow(const bool ShouldWindowClose) const
+{
+    glfwSetWindowShouldClose(m_Window, ShouldWindowClose);
 }

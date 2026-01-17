@@ -13,10 +13,10 @@ if ($Action -eq "clean") {
 
 cd build
     
-if ($Action -eq "clean") {
-    cmake -G Ninja ..
+if ($Action -eq "build") {
+    cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Debug
+    ninja
 }
 
-ninja
 ./opengl_minecraft.exe
 cd ..\scripts\

@@ -10,6 +10,8 @@ public:
     Window(const int Width, const int Height);
 
     void Init() override;
+ 
+    void Run() override;
     
     void Destroy() override;
     
@@ -27,6 +29,8 @@ public:
     {
         return m_Width;
     }
+    
+    void SetShouldCloseWindow(const bool ShouldWindowClose) const;
 private:
     GLFWwindow* m_Window;
     

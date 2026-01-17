@@ -1,3 +1,5 @@
+#include <GLFW/glfw3.h>
+
 #include "core/engine/engine.h"
 
 UniquePtr<Engine> Engine::ms_Instance {nullptr};
@@ -19,7 +21,11 @@ void Engine::Init()
 
 void Engine::Run()
 {
-    m_Renderer.Render();
+    while (!glfwWindowShouldClose(m_Renderer.GetWindowPtr()))
+    {
+        m_InputManager.Update(m_Renderer.GetWindow());
+        m_Renderer.Run();
+    }
 }
 
 void Engine::Destroy()

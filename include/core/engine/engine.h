@@ -2,6 +2,7 @@
 
 #include "util/types.h"
 #include "core/gfx/renderer.h"
+#include "core/engine/input_manager.h"
 
 class Engine
 {
@@ -18,6 +19,8 @@ private:
     static UniquePtr<Engine> ms_Instance;
     
     Renderer m_Renderer;
+    
+    InputManager m_InputManager;
 
     Engine() = default;
 };
