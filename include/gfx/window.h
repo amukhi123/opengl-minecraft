@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/engine/engine_system.h"
+#include "engine/engine_system.h"
 
 class GLFWwindow;
 

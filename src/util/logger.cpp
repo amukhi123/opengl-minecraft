@@ -26,6 +26,11 @@ void Logger::Log(const String& LogMessage, const LogLevel LogMessageLogLevel)
     }
 }
 
+void Logger::SetLogLevel(const LogLevel LogLevelToSet)
+{
+    m_LogLevel = LogLevelToSet;
+}
+
 String Logger::PrintLogLevel(const LogLevel LogLevelToPrint)
 {
     switch (LogLevelToPrint)

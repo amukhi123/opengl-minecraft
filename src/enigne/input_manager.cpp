@@ -1,8 +1,8 @@
 #include <GLFW/glfw3.h>
 
-#include "core/engine/input_manager.h"
+#include "engine/input_manager.h"
 
-#include "core/gfx/window.h"
+#include "gfx/window.h"
 
 void InputManager::Update(Window* Window)
 {

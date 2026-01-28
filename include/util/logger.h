@@ -12,12 +12,16 @@ enum class LogLevel : uint8
 class Logger
 {
 public:
+    static constexpr uint16 kMaxLogSize {1000};
+
     static Logger* GetInstance();
 
     Logger(const Logger& LoggerToCopy) = delete;
     Logger& operator=(const Logger& LoggerToCopy) = delete;
     
     void Log(const String& LogMessage, const LogLevel LogMessageLogLevel);
+    
+    void SetLogLevel(const LogLevel LogLevelToSet);
 private:
     static UniquePtr<Logger> ms_Instance;
     

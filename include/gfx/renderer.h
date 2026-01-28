@@ -1,8 +1,11 @@
 #pragma once
 
-#include "core/engine/engine_system.h"
+#include "engine/engine_system.h"
 
-#include "core/gfx/window.h"
+#include "gfx/window.h"
+#include "gfx/vbo.h"
+#include "gfx/vao.h"
+#include "gfx/shader_program.h"
 
 class Renderer : public EngineSystem
 {
@@ -26,4 +29,10 @@ public:
     }
 private:
     Window m_Window;
+    
+    Vbo m_Vbo;
+    
+    Vao m_Vao;
+    
+    ShaderProgram m_ShaderProgram;
 };

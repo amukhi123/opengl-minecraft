@@ -1,4 +1,4 @@
-#include "core/gfx/window.h"
+#include "gfx/window.h"
 
 #include <cstdlib>
 #include <GLFW/glfw3.h>

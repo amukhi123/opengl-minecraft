@@ -1,8 +1,8 @@
 #pragma once
 
 #include "util/types.h"
-#include "core/gfx/renderer.h"
-#include "core/engine/input_manager.h"
+#include "gfx/renderer.h"
+#include "engine/input_manager.h"
 
 class Engine
 {

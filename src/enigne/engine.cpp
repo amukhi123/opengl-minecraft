@@ -1,6 +1,8 @@
 #include <GLFW/glfw3.h>
 
-#include "core/engine/engine.h"
+#include "engine/engine.h"
+
+#include "util/logger.h"
 
 UniquePtr<Engine> Engine::ms_Instance {nullptr};
 
@@ -16,6 +18,8 @@ Engine* Engine::GetInstance()
 
 void Engine::Init()
 {
+    Logger::GetInstance()->SetLogLevel(LogLevel::Debug);
+    
     m_Renderer.Init();
 }
 
