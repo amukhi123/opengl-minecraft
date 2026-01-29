@@ -5,6 +5,8 @@
 #include <cstdint>
 #include <vector>
 
+using SizeT = size_t;
+
 template<typename T>
 using UniquePtr = std::unique_ptr<T>;
 

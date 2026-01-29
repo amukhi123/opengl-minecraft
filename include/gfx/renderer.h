@@ -3,9 +3,9 @@
 #include "engine/engine_system.h"
 
 #include "gfx/window.h"
-#include "gfx/vbo.h"
 #include "gfx/vao.h"
 #include "gfx/shader_program.h"
+#include "gfx/buffer_object.h"
 
 class Renderer : public EngineSystem
 {
@@ -30,9 +30,11 @@ public:
 private:
     Window m_Window;
     
-    Vbo m_Vbo;
+    BufferObject m_Vbo;
     
     Vao m_Vao;
+    
+    BufferObject m_Ebo;
     
     ShaderProgram m_ShaderProgram;
 };
