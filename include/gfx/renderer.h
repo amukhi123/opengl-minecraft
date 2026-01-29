@@ -34,7 +34,5 @@ private:
     
     Vao m_Vao;
     
-    BufferObject m_Ebo;
-    
     ShaderProgram m_ShaderProgram;
 };

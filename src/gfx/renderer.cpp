@@ -7,7 +7,7 @@
 #include "util/logger.h"
 #include "gfx/renderer.h"
 
-Renderer::Renderer() : m_Window {800, 800}, m_Vbo {}, m_Vao {}, m_Ebo {}, m_ShaderProgram {}
+Renderer::Renderer() : m_Window {800, 800}, m_Vbo {}, m_Vao {}, m_ShaderProgram {}
 {
 }
 
@@ -19,16 +19,12 @@ void Renderer::Init()
     
     List<float> verticies 
     {
-        -0.5f, -0.5f, 0.0f,
-        -0.5f, 0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.5f, 0.5f, 0.0f
-    };
-    
-    List<uint32> indicies 
-    {
-        0, 1, 2,
-        1, 2, 3
+        0.f, 0.f, 0.0f,
+        -0.5f, 0.f, 0.0f,
+        -0.25f, 0.5f, 0.0f,
+        0.f, 0.f, 0.0f,
+        0.25f, 0.5f, 0.0f,
+        0.5f, 0.f, 0.0f
     };
     
     if (!gladLoadGL(reinterpret_cast<GLADloadfunc>(glfwGetProcAddress)))
@@ -43,8 +39,6 @@ void Renderer::Init()
     m_Vao.Init();
     
     m_Vbo.Init(verticies, BufferType::Vbo);
-    
-    m_Ebo.Init(indicies, BufferType::Ebo); 
     
     // Magic value :(
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
@@ -64,7 +58,7 @@ void Renderer::Run()
     m_Vao.Bind();
     
     // Magic value :(
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
     
     glfwSwapBuffers(m_Window.GetWindow());
     glfwPollEvents();
