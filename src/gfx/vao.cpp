@@ -13,3 +13,8 @@ void Vao::Bind() const
 {
     glBindVertexArray(m_Id);
 }
+
+void Vao::UnBind() const
+{
+    glBindVertexArray(0);
+}

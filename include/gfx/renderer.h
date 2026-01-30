@@ -30,9 +30,11 @@ public:
 private:
     Window m_Window;
     
-    BufferObject m_Vbo;
+    BufferObject m_VboOne;
+    BufferObject m_VboTwo;
     
-    Vao m_Vao;
+    Vao m_VaoOne;
+    Vao m_VaoTwo;
     
     ShaderProgram m_ShaderProgram;
 };

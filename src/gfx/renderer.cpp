@@ -7,7 +7,7 @@
 #include "util/logger.h"
 #include "gfx/renderer.h"
 
-Renderer::Renderer() : m_Window {800, 800}, m_Vbo {}, m_Vao {}, m_ShaderProgram {}
+Renderer::Renderer() : m_Window {800, 800}, m_VboOne {}, m_VboTwo {}, m_VaoOne {}, m_VaoTwo {}, m_ShaderProgram {}
 {
 }
 
@@ -17,11 +17,15 @@ void Renderer::Init()
     
     m_Window.Init();
     
-    List<float> verticies 
+    List<float> vertexDataOne
     {
         0.f, 0.f, 0.0f,
         -0.5f, 0.f, 0.0f,
-        -0.25f, 0.5f, 0.0f,
+        -0.25f, 0.5f, 0.0f
+    };
+    
+    List<float> vertexDataTwo
+    {
         0.f, 0.f, 0.0f,
         0.25f, 0.5f, 0.0f,
         0.5f, 0.f, 0.0f
@@ -36,13 +40,22 @@ void Renderer::Init()
     
     m_ShaderProgram.Init();
     
-    m_Vao.Init();
+    m_VaoOne.Init();
     
-    m_Vbo.Init(verticies, BufferType::Vbo);
+    m_VboOne.Init(vertexDataOne, BufferType::Vbo);
+    
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
+    glEnableVertexAttribArray(0);
+    
+    m_VaoTwo.Init();
+    
+    m_VboTwo.Init(vertexDataTwo, BufferType::Vbo);
     
     // Magic value :(
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
     glEnableVertexAttribArray(0);
+    
+    m_VaoTwo.UnBind();
     
     glViewport(0, 0, m_Window.GetWidth(), m_Window.GetHeight());
 }
@@ -55,10 +68,15 @@ void Renderer::Run()
     
     m_ShaderProgram.Use();
     
-    m_Vao.Bind();
+    m_VaoOne.Bind();
     
     // Magic value :(
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    
+    m_VaoTwo.Bind();
+    
+    // Magic value :(
+    glDrawArrays(GL_TRIANGLES, 0, 3);
     
     glfwSwapBuffers(m_Window.GetWindow());
     glfwPollEvents();
