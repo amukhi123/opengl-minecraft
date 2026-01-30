@@ -1,3 +1,5 @@
+#include "gfx/shader.h"
+#include "gfx/shader_program.h"
 #define GLAD_GL_IMPLEMENTATION 1
 
 #include <cstdlib>
@@ -7,7 +9,7 @@
 #include "util/logger.h"
 #include "gfx/renderer.h"
 
-Renderer::Renderer() : m_Window {800, 800}, m_VboOne {}, m_VboTwo {}, m_VaoOne {}, m_VaoTwo {}, m_ShaderProgram {}
+Renderer::Renderer() : m_Window {800, 800}, m_VboOne {}, m_VboTwo {}, m_VaoOne {}, m_VaoTwo {}, m_ShaderProgram {}, m_ShaderProgramYellow {}
 {
 }
 
@@ -38,7 +40,21 @@ void Renderer::Init()
         exit(EXIT_FAILURE);
     }
     
-    m_ShaderProgram.Init();
+    List<ShaderInfo> shadersInfo 
+    {
+        {"default.vs", ShaderType::Vertex},
+        {"default.fs", ShaderType::Fragment}
+    };
+    
+    m_ShaderProgram.Init(shadersInfo);
+    
+    List<ShaderInfo> shadersInfoYellow
+    {
+        {"default.vs", ShaderType::Vertex},
+        {"yellow.fs", ShaderType::Fragment}
+    };
+    
+    m_ShaderProgramYellow.Init(shadersInfoYellow);
     
     m_VaoOne.Init();
     
@@ -66,12 +82,14 @@ void Renderer::Run()
     glClearColor(0.3f, 0.4f, 0.5f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT);
     
-    m_ShaderProgram.Use();
+    m_ShaderProgramYellow.Use();
     
     m_VaoOne.Bind();
     
     // Magic value :(
     glDrawArrays(GL_TRIANGLES, 0, 3);
+    
+    m_ShaderProgram.Use();
     
     m_VaoTwo.Bind();
     

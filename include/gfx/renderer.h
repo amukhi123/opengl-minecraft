@@ -37,4 +37,5 @@ private:
     Vao m_VaoTwo;
     
     ShaderProgram m_ShaderProgram;
+    ShaderProgram m_ShaderProgramYellow;
 };
