@@ -1,3 +1,5 @@
+#include "gfx/shader.h"
+#include "gfx/shader_program.h"
 #define GLAD_GL_IMPLEMENTATION 1
 
 #include <cstdlib>
@@ -7,7 +9,7 @@
 #include "util/logger.h"
 #include "gfx/renderer.h"
 
-Renderer::Renderer() : m_Window {800, 800}, m_Vbo {}, m_Vao {}, m_Ebo {}, m_ShaderProgram {}
+Renderer::Renderer() : m_Window {800, 800}, m_Vbo {}, m_Ebo {}, m_Vao {}, m_ShaderProgram {}
 {
 }
 
@@ -17,20 +19,6 @@ void Renderer::Init()
     
     m_Window.Init();
     
-    List<float> verticies 
-    {
-        -0.5f, -0.5f, 0.0f,
-        -0.5f, 0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.5f, 0.5f, 0.0f
-    };
-    
-    List<uint32> indicies 
-    {
-        0, 1, 2,
-        1, 2, 3
-    };
-    
     if (!gladLoadGL(reinterpret_cast<GLADloadfunc>(glfwGetProcAddress)))
     {
         Logger::GetInstance()->Log("Failed to pass GLAD function to load OpenGL functions.", LogLevel::Error);
@@ -38,15 +26,34 @@ void Renderer::Init()
         exit(EXIT_FAILURE);
     }
     
-    m_ShaderProgram.Init();
+    List<ShaderInfo> shadersInfo 
+    {
+        {"default.vs", ShaderType::Vertex},
+        {"default.fs", ShaderType::Fragment}
+    };
+    
+    m_ShaderProgram.Init(shadersInfo);
     
     m_Vao.Init();
     
-    m_Vbo.Init(verticies, BufferType::Vbo);
+    List<float> vertexData
+    {
+        -0.5f, -0.5f, 0.0f,
+        -0.5f, 0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
+        0.5f, 0.5f, 0.0f
+    };
     
-    m_Ebo.Init(indicies, BufferType::Ebo); 
+    m_Vbo.Init(vertexData, BufferType::Vbo);
     
-    // Magic value :(
+    List<uint32> indicies 
+    {
+        0, 1, 2,
+        1, 2, 3
+    };
+    
+    m_Ebo.Init(indicies, BufferType::Ebo);
+    
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
     glEnableVertexAttribArray(0);
     

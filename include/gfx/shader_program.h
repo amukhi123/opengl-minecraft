@@ -7,7 +7,7 @@
 class ShaderProgram
 {
 public:
-    void Init();
+    void Init(const List<ShaderInfo>& ShadersInfo);
 
     void Use() const;
 private:

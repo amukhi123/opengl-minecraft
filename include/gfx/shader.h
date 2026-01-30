@@ -8,6 +8,12 @@ enum class ShaderType : uint8
     Fragment,
 };
 
+struct ShaderInfo
+{
+    String fileName;
+    ShaderType shaderType;
+};
+
 class Shader
 {
 public:

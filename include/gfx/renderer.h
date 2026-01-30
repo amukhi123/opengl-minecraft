@@ -32,9 +32,9 @@ private:
     
     BufferObject m_Vbo;
     
-    Vao m_Vao;
-    
     BufferObject m_Ebo;
+    
+    Vao m_Vao;
     
     ShaderProgram m_ShaderProgram;
 };

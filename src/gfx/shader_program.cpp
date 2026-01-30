@@ -1,15 +1,31 @@
+#include <cstdlib>
 #include <glad/gl.h>
 
 #include "gfx/shader_program.h"
 
+#include "gfx/shader.h"
 #include "util/logger.h"
 
-void ShaderProgram::Init()
+void ShaderProgram::Init(const List<ShaderInfo>& ShadersInfo)
 {
     m_Id = glCreateProgram();
     
-    m_VertexShader.Compile("default.vs", ShaderType::Vertex);
-    m_FragmentShader.Compile("default.fs", ShaderType::Fragment);
+    for (const ShaderInfo& shaderInfo : ShadersInfo)
+    {
+        if (shaderInfo.shaderType == ShaderType::Vertex)
+        {
+            m_VertexShader.Compile(shaderInfo.fileName, ShaderType::Vertex);
+        }
+        else if (shaderInfo.shaderType == ShaderType::Fragment)
+        {
+            m_FragmentShader.Compile(shaderInfo.fileName, ShaderType::Fragment);
+        }
+        else 
+        {
+            Logger::GetInstance()->Log("Unknown shader type.", LogLevel::Error);
+            exit(EXIT_FAILURE);
+        }
+    }
     
     glAttachShader(m_Id, m_VertexShader.GetId());
     glAttachShader(m_Id, m_FragmentShader.GetId());
